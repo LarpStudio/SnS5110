@@ -13,7 +13,7 @@
 class SnS5110 {
   public:
     //--------------------------------- public functions ---------------------------------
-    void Init(byte DC, byte CE,byte DIN = MOSI, byte CLK = SCLK);
+    void Init(byte rst, byte ce, byte dc, byte din = MOSI, byte clk = SCK);
     void Hello(); //demo function
     void XY(byte x, byte y); //set cursor to position X,Y ,0 <= x <= 83 ,0 <= y <= 5
     void WriteCharacter(char character); //print single character to cursor position
@@ -29,7 +29,6 @@ class SnS5110 {
     uint8_t clock = NULL;
 
     //--------------------------------- private functions ---------------------------------
-    void init(uint8_t a);
     void writeCmd(byte cmd);
     void writeData(byte dat);
 
