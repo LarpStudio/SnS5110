@@ -11,15 +11,24 @@ void SnS5110::Clear() {
   for (int i = 0; i < 504; i++)writeData(0x00); //clear LCD
 }
 
-void SnS5110::Init() {
-  pinMode(RST, OUTPUT);
-  pinMode(CE, OUTPUT);
-  pinMode(DC, OUTPUT);
-  pinMode(DIN, OUTPUT);
-  pinMode(CLK, OUTPUT);
+void SnS5110::Init(byte rst, byte ce, byte dc, byte din = MOSI, byte clk = SCK) {
+  reset = rst;
+  chipEnable = ce;
+  dataCommand = dc;
+  
+  dataIn = din;
+  clock = clk;
+  
+  pinMode(reset, OUTPUT);
+  pinMode(chipEnable OUTPUT);
+  pinMode(dataCommand, OUTPUT);
+    
+  pinMode(dataIn, OUTPUT);
+  pinMode(clock, OUTPUT);
 
-  digitalWrite(RST, LOW);
-  digitalWrite(RST, HIGH);
+  //clear all display setting
+  digitalWrite(reset, LOW);
+  digitalWrite(reset, HIGH);
 
   //writeCmd(0x00); //NOP, debug purposes
 
@@ -51,22 +60,19 @@ void SnS5110::WriteCString(char *cString) { //print out character array
 }
 
 //--------------------------------- PRIVATE ---------------------------------
-void SnS5110::init(byte a) {
-
-}
 
 void SnS5110::writeData(byte dat) {
-  digitalWrite(DC, HIGH); //DC pin is low for commands
-  digitalWrite(CE, LOW);
-  shiftOut(DIN, CLK, MSBFIRST, dat); //transmit serial data
-  digitalWrite(CE, HIGH);
+  digitalWrite(dataCommand, HIGH); //DC pin is low for commands
+  digitalWrite(chipEnable, LOW);
+  shiftOut(dataIn, clock, MSBFIRST, dat); //transmit serial data
+  digitalWrite(chipEnable, HIGH);
 }
 
 void SnS5110::writeCmd(byte cmd) {
-  digitalWrite(DC, LOW); //DC pin is low for commands
-  digitalWrite(CE, LOW);
-  shiftOut(DIN, CLK, MSBFIRST, cmd); //transmit serial data
-  digitalWrite(CE, HIGH);
+  digitalWrite(dataCommand, LOW); //DC pin is low for commands
+  digitalWrite(chipEnable, LOW);
+  shiftOut(dataIn, clock, MSBFIRST, cmd); //transmit serial data
+  digitalWrite(chipEnable, HIGH);
 }
 
 
