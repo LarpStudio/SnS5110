@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For RTC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SnS5110	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+Init	KEYWORD2
+Hello	KEYWORD2
+XY	KEYWORD2
+WriteCharacter	KEYWORD2
+WriteCString	KEYWORD2
+Clear	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
