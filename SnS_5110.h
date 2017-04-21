@@ -13,7 +13,7 @@
 class SnS5110 {
   public:
     //--------------------------------- public functions ---------------------------------
-    void Init();
+    void Init(byte DC, byte CE,byte DIN = MOSI, byte CLK = SCLK);
     void Hello(); //demo function
     void XY(byte x, byte y); //set cursor to position X,Y ,0 <= x <= 83 ,0 <= y <= 5
     void WriteCharacter(char character); //print single character to cursor position
